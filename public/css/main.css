@@ -2,7 +2,7 @@ body {
     background-color:#9dce9d;
     font-family: 'Tahoma','sans-serif';
     color: #2a3444;
-    padding: 10px;
+
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,8 @@ main {
     display:flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #367588;
+    padding: 0;
 }
 section {
     margin: auto;
@@ -35,6 +37,7 @@ section {
     background-repeat: no-repeat;
     padding: 80px;
     height: 100%;
+
 
 }
 .gridContainer {
@@ -57,4 +60,9 @@ a {
 footer {
     display:flex;
     align-items: center;
+}
+form {
+    background-color: rgba(157, 206, 157, 0.3);
+    padding: 10px;
+    border-radius: 10px 10px 10px 10px;
 }

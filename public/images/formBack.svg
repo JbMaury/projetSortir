@@ -1,4 +1,5 @@
 <svg width="400" height="210" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="350" height="210" fill="#367588" />
   <!-- Ligne d'en haut -->
   <line x1="0" y1="0" x2="350" y2="0" stroke="white" stroke-width="8"/>
   <!-- Ligne de gauche -->
@@ -7,4 +8,5 @@
   <line x1="0" y1="210" x2="350" y2="210" stroke="white" stroke-width="8"/>
   <line x1="350" y1="0" x2="350" y2="30" stroke="white" stroke-width="4"/>
   <line x1="350" y1="180" x2="350" y2="210" stroke="white" stroke-width="4"/>
+
 </svg>
