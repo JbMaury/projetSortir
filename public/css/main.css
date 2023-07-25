@@ -29,11 +29,19 @@ main {
 }
 section {
     margin: auto;
+    position: relative;
+    background-image: url("../images/formBack.svg");
+    background-position: left;
+    background-repeat: no-repeat;
+    padding: 30px;
+    height: 100%;
+
 }
 .gridContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+
 }
 a {
     color: white;
