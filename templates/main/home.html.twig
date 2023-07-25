@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Home {% endblock %}
+
+{% block body %}
+<div class="container">
+    <section>
+        <form>
+            <div class="gridContainer">
+                    <label for="identifiant">Identifiant :</label>
+                    <input id="identifiant" type="text">
+                    <label for="motDePasse">Mot de passe :</label>
+                    <input id="motDePasse" type="password">
+                    <button>Connexion</button>
+                    <div><input type="checkbox"> Se souvenir de moi</div>
+                    <span></span>
+                    <a href="#"> Mot de passe oublié</a>
+            </div>
+
+        </form>
+    </section>
+</div>
+{% endblock %}
