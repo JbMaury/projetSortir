@@ -49,7 +49,7 @@ class User
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
-    #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'inscrits')]
     private Collection $sorties;
 
     public function __construct()
@@ -194,6 +194,7 @@ class User
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties->add($sorty);
+            $sorty->addInscrit($this);
         }
 
         return $this;
@@ -201,7 +202,9 @@ class User
 
     public function removeSorty(Sortie $sorty): static
     {
-        $this->sorties->removeElement($sorty);
+        if ($this->sorties->removeElement($sorty)) {
+            $sorty->removeInscrit($this);
+        };
 
         return $this;
     }

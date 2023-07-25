@@ -38,11 +38,20 @@ class Sortie
     private ?string $motifAnnulation = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'sorties')]
-    private Collection $users;
+    private Collection $inscrits;
+    #[ORM\ManyToOne]
+    private ?User $organisateur = null;
+    #[ORM\ManyToOne]
+    private ?Etat $etat = null;
+    #[ORM\ManyToOne]
+    private ?Campus $campus = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
+    private ?Lieu $lieu = null;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->inscrits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -137,27 +146,74 @@ class Sortie
     /**
      * @return Collection<int, User>
      */
-    public function getUsers(): Collection
+    public function getInscrits(): Collection
     {
-        return $this->users;
+        return $this->inscrits;
     }
 
-    public function addUser(User $user): static
+    public function addInscrit(User $inscrit): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addSorty($this);
+        if (!$this->inscrits->contains($inscrit)) {
+            $this->inscrits->add($inscrit);
+            $inscrit->addSorty($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): static
+    public function removeInscrit(User $inscrit): static
     {
-        if ($this->users->removeElement($user)) {
-            $user->removeSorty($this);
+        if ($this->inscrits->removeElement($inscrit)) {
+            $inscrit->removeSorty($this);
         }
+
+        return $this;
+    }
+
+    public function getOrganisateur(): ?User
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(?User $organisateur): static
+    {
+        $this->organisateur = $organisateur;
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): static
+    {
+        $this->etat = $etat;
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setSite(?Campus $campus): static
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): static
+    {
+        $this->lieu = $lieu;
 
         return $this;
     }
 }
+
