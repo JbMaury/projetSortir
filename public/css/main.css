@@ -33,7 +33,7 @@ section {
     background-image: url("../images/formBack.svg");
     background-position: left;
     background-repeat: no-repeat;
-    padding: 30px;
+    padding: 80px;
     height: 100%;
 
 }
@@ -48,11 +48,12 @@ a {
     text-decoration: underline;
     padding: 3px;
 }
-a:hover {
+.header-nav a:hover {
     background-color: #62b7ec;
     border-radius: 10px;
     text-decoration: none;
 }
+
 footer {
     display:flex;
     align-items: center;
