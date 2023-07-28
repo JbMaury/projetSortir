@@ -3,9 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use App\Entity\Participant;
 use App\Entity\Sortie;
-use http\Client\Curl\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
