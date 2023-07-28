@@ -50,7 +50,7 @@ class SortieType extends AbstractType
                 'choice_label' => 'nom',
             ])
             /*->add('organisateur',EntityType::class, [
-                'class' => Participant::class,
+                'class' => User::class,
                 'label' => 'Organisateur'
 
             ])*/
