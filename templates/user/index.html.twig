@@ -1,0 +1,23 @@
+{%  extends 'base.html.twig' %}
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+    <h1>Utilisateurs</h1>
+    <div class="container">
+
+    {% for user in users %}
+
+        <section>
+
+            <div class="gridProfil">
+            {{user.id}} : {{ user.email }}
+            roles : [{{ user.roles ?user.roles|json_encode : '' }}]
+            {{ user.prenom }} {{ user.nom }} [pseudo : {{ user.pseudo }}] Tel :{{ user.telephone }}
+            Utilisateur actif ? : {{ user.actif ? 'Oui' : 'Non'}}
+            </div>
+        </section>
+
+    {% endfor %}
+    </div>
+
+{% endblock %}

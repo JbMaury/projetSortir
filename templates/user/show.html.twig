@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1>Profil de {{ user.pseudo }}</h1>
+    <div class="container">
+        <section class="profil">
+            <form>
+            <div class="gridProfil">
+
+                <h2>Email :</h2>
+                <input type="text" value="{{ user.email }}" disabled>
+
+                <h2>Pseudo :</h2>
+                <input type="text" value="{{ user.pseudo }}" disabled>
+
+                <h2>Nom : </h2>
+                <input type="text" value="{{ user.nom }}" disabled>
+
+                <h2>Prénom : </h2>
+                <input type="text" value="{{ user.prenom }}" disabled>
+
+                <h2>Telephone : </h2>
+                <input type="text" value="{{ user.telephone }}" disabled>
+
+                <h2>Campus : </h2>
+                <input type="text" value="{{ user.campus}}" disabled>
+
+                <h2>Actif : </h2>
+               <input type="checkbox" {{ user.actif ? 'checked' : ''}} disabled>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <h2>Admin : </h2>
+                    <span> Oui </span>
+                {% endif %}
+
+            </div>
+            </form>
+        </section>
+    </div>
+{% endblock %}
+

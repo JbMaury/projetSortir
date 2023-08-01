@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $motPasse = null;
+    private ?string $password = null;
 
     #[ORM\Column]
     private ?bool $actif = null;
@@ -114,12 +114,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPassword(): ?string
     {
-        return $this->motPasse;
+        return $this->password;
     }
 
-    public function setPassword(string $motPasse): static
+    public function setPassword(string $password): static
     {
-        $this->motPasse = $motPasse;
+        $this->password = $password;
 
         return $this;
     }

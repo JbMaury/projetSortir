@@ -6,10 +6,16 @@
     </h1>
     <nav class="header-nav">
         <a href="{{ path('main_home') }}" title="Retourner à l'accueil">Accueil</a>
-        <a href="#" title="Mon profil">Mon profil</a>
-        <a href="#" title="Se déconnecter">Se déconnecter</a>
+        {%  if app.user %}
+        <a href="{{ path('app_user_show', {'id': app.user.id})}}" title="Mon profil">Mon profil</a>
+        <a href="{{ path('app_logout')}}" title="Se déconnecter">Se déconnecter</a>
+        {% else %}
+        <a href="{{ url('app_login')}}" title="Mon profil">Se connecter</a>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
         <a href="#" title="Gérer les villes">Villes (admin)</a>
         <a href="#" title="Gérer les campus">Campus (admin)</a>
+        {%  endif %}
 
     </nav>
 </div>

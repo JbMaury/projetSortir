@@ -23,9 +23,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(int $id, UserRepository $userRepository): Response
+    public function show(User $user): Response
     {
-        $user = $userRepository->find($id);
+        if (!$this->getUser() || $this->getUser()->getId() != $user->getId()) {
+            return $this->redirectToRoute('app_login');
+        }
+//        if ($this->getUser()->getId() == $user->getId()) {
+//            //todo redirection vers page de modification
+//        }
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);

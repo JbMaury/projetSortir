@@ -26,6 +26,7 @@ main {
     display:flex;
     flex-direction: column;
     justify-content: center;
+    align-items:center;
     background-color: #367588;
     padding: 0;
 }
@@ -40,11 +41,23 @@ section {
 
 
 }
+.register {
+    background-image: url("../images/formBackRegister.svg");
+}
+.profil {
+    background-image: url("../images/formBackProfil.svg");
+}
 .gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+
+}
+.gridProfil {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-
+    align-items: center;
 }
 a {
     color: white;
@@ -65,4 +78,11 @@ form {
     background-color: rgba(157, 206, 157, 0.3);
     padding: 10px;
     border-radius: 10px 10px 10px 10px;
+}
+input[type="text"] {
+    height: 20px;
+}
+.error {
+    color: #a40303;
+    font-weight: bold;
 }

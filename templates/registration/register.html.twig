@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1>Enregistrer nouvel utilisateur</h1>
+<div class="container">
+    <section class="register">
+
+
+        {{ form_errors(registrationForm) }}
+                {{ form_start(registrationForm) }}
+
+        <div class="gridContainer">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email) }}
+            {% if registrationForm.email.vars.errors|length > 0 %}
+                <div class="error-message">
+                    {% for error in registrationForm.email.vars.errors %}
+                        <span class="error">{{ error.message }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+            <span></span>
+            {% endif %}
+            {{ form_label(registrationForm.pseudo) }}
+            {{ form_widget(registrationForm.pseudo) }}
+            {% if registrationForm.pseudo.vars.errors|length > 0 %}
+                <div class="error-message">
+                    {% for error in registrationForm.pseudo.vars.errors %}
+                        <span class="error">{{ error.message }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <span></span>
+            {% endif %}
+
+            {{ form_label(registrationForm.nom) }}
+            {{ form_widget(registrationForm.nom) }}
+            {% if registrationForm.nom.vars.errors|length > 0 %}
+                <div class="error-message">
+                    {% for error in registrationForm.nom.vars.errors %}
+                        <span class="error">{{ error.message }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <span></span>
+            {% endif %}
+
+            {{ form_label(registrationForm.prenom) }}
+            {{ form_widget(registrationForm.prenom) }}
+            {% if registrationForm.prenom.vars.errors|length > 0 %}
+                <div class="error-message">
+                    {% for error in registrationForm.prenom.vars.errors %}
+                        <span class="error">{{ error.message }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <span></span>
+            {% endif %}
+
+            {{ form_label(registrationForm.telephone) }}
+            {{ form_widget(registrationForm.telephone) }}
+            {% if registrationForm.telephone.vars.errors|length > 0 %}
+                <div class="error-message">
+                    {% for error in registrationForm.telephone.vars.errors %}
+                        <span class="error">{{ error.message }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <span></span>
+            {% endif %}
+
+            {{ form_label(registrationForm.campus) }}
+            {{ form_widget(registrationForm.campus) }}
+            <span></span>
+
+            {{ form_label(registrationForm.actif) }}
+            {{ form_widget(registrationForm.actif) }}
+            <span></span>
+
+            {{ form_label(registrationForm.admin) }}
+            {{ form_widget(registrationForm.admin) }}
+            <span></span>
+
+            {{ form_label(registrationForm.password) }}
+            {{ form_widget(registrationForm.password) }}
+            {% if registrationForm.password.vars.errors|length > 0 %}
+                <div class="error-message">
+                    {% for error in registrationForm.password.vars.errors %}
+                        <span class="error">{{ error.message }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <span></span>
+            {% endif %}
+
+            <button type="submit" class="btn">Register</button>
+                 {{ form_end(registrationForm) }}
+            </div>
+    </section>
+</div>
+{% endblock %}
+
