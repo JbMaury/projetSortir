@@ -1,0 +1,15 @@
+{%  extends 'base.html.twig' %}
+{% block title %}Liste des sorties{% endblock %}
+
+{% block body %}
+<h1>Page des sorties</h1>
+    <div class="container">
+            <section>
+                <div class="gridProfil">
+                    {% for sortie in sorties %}
+                    {% endfor %}
+                </div>
+            </section>
+    </div>
+
+{% endblock %}

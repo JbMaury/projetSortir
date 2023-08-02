@@ -3,21 +3,26 @@
 {% block title %}{{ parent() }} | Home {% endblock %}
 
 {% block body %}
+    <h2> Déjà {{ sortiesNb }} Sorties organisées !!</h2>
 <div class="container">
-    <section>
-        <form class="outtathebox">
-            <div class="gridContainer">
-                    <label for="identifiant">Identifiant :</label>
-                    <input id="identifiant" type="text">
-                    <label for="motDePasse">Mot de passe :</label>
-                    <input id="motDePasse" type="password">
-                    <button>Connexion</button>
-                    <div><input type="checkbox"> Se souvenir de moi</div>
-                    <span></span>
-                    <a href="#"> Mot de passe oublié</a>
-            </div>
 
-        </form>
+    <section>
+        <div class="gridContainer">
+                <h1>Bienvenue sur le site de Sortir! @ENI
+                    {% if app.user %}
+                        {{ user.pseudo}}
+                    {% endif %}
+                </h1>
+                {% if not app.user %}
+                    <p>
+                        Cette application est réservée aux étudiants de l'ENI. Votre inscription à la plateforme est
+                        réalisée par les administrateurs.
+                        Vous pouvez dès à présent  <a href="{{ path('app_login') }}">vous connecter</a>
+                    </p>
+                {% else %}
+                    <p>N'attendez plus pour voir les évènements organisés près de chez vous ! <a href="{{ path('app_sortie_index') }}">Je sors !</a></p>
+                {% endif %}
+        </div>
     </section>
 </div>
 {% endblock %}

@@ -197,7 +197,7 @@ class Sortie
         return $this->campus;
     }
 
-    public function setSite(?Campus $campus): static
+    public function setCampus(?Campus $campus): static
     {
         $this->campus = $campus;
 

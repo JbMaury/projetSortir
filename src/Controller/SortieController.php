@@ -14,6 +14,7 @@ use App\Repository\UserRepository;
 use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -29,87 +30,37 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     #[Route('/', name: 'app_sortie_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, SortieRepository $sortieRepository, UserRepository $UserRepository, CampusRepository $campusRepository): Response
+    public function index(Request $request, SortieRepository $sortieRepository, UserRepository $userRepository, CampusRepository $campusRepository): Response
     {
+        $this->denyAccessUnlessGranted("ROLE_USER");
 
-        $sorties = $sortieRepository->findBySortieDate();
-
-        $form = $this->createFormBuilder()
-            ->add('campus', EntityType::class, [
-                'class' => Campus::class,
-                'choice_label' => 'nom',
-                'placeholder' => '-- Choisissez votre campus --',
-                'required' => false
-            ])
-            ->add('nom', TextType::class, [
-                'label' => false,
-                'required' => false
-            ])
-            ->add('date1', DateType::class, [
-                'label' => false,
-                'html5' => true,
-                'widget' => 'single_text',
-                'required' => false
-            ])
-            ->add('date2', DateType::class, [
-                'label' => false,
-                'html5' => true,
-                'widget' => 'single_text',
-                'required' => false
-            ])
-            ->add('organisateur', CheckboxType::class, [
-                'label' => false,
-                'required' => false,
-            ])
-            ->add('inscrit', CheckboxType::class, [
-                'label' => false,
-                'required' => false
-            ])
-            ->add('nonInscrit', CheckboxType::class, [
-                'label' => false,
-                'required' => false
-            ])
-            ->add('sortiePassees', CheckboxType::class, [
-                'label' => false,
-                'required' => false
-            ])
-            ->getForm();
-
-
-        $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $filtres = $form->getData();
-
-            $sorties = $sortieRepository->findByFiltres($filtres, $this->getUser());
-        }
-
-
+        $sorties = $sortieRepository->findAll();
+        $sortiesNb = $sortieRepository->count([]);
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sorties,
-            'participants' => $UserRepository->findAll(),
+            'sortiesNb' => $sortiesNb,
             'campus' => $campusRepository->findAll(),
-            'form' => $form->createView(),
         ]);
     }
 
 
 
     #[Route('/new', name: 'app_sortie_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
+    public function new(EntityManagerInterface $entityManager, UserRepository $userRepository, Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
     {
-        $etat = $etatRepository->findOneBy(['libelle' =>'ouverte'],[]);
+        $this->denyAccessUnlessGranted("ROLE_USER");
         $sortie = new Sortie();
-        $sortie->setOrganisateur($this->getUser());
-        $sortie->setEtat($etat);
+
+        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $sortie->setCampus($user->getCampus());
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $sortieRepository->save($sortie, true);
-            $this->addFlash('success', 'la sortie : '  .$sortie->getNom(). ' à bien été créée' );
+            $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'Créée']));
+            $sortie->setOrganisateur($this->getUser());
+            $entityManager->persist($sortie);
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
         }
